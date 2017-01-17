@@ -172,6 +172,17 @@ class Banner extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
             ]
         );
 
+        $elements['description'] = $fieldset->addField(
+            'description',
+            'textarea',
+            [
+                'name' => 'description',
+                'label' => __('Description'),
+                'title' => __('Description'),
+                'required' => false,
+            ]
+        );
+
         $elements['status'] = $fieldset->addField(
             'status',
             'select',
