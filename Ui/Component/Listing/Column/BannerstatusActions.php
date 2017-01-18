@@ -26,12 +26,13 @@ namespace Magestore\Bannerslider\Ui\Component\Listing\Column;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magestore\Bannerslider\Ui\Component\Listing\Column\AbstractColumn;
 
 /**
  * Class BannerstatusActions
  * @package Magestore\Bannerslider\Ui\Component\Listing\Column
  */
-class BannerstatusActions extends \Magestore\Bannerslider\Ui\Component\Listing\Column\AbstractColumn
+class BannerstatusActions extends AbstractColumn
 {
     /**
      * @var UrlInterface

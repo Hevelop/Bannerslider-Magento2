@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Model\ResourceModel;
 
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+
 /**
  * Value Resource Model
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Model\ResourceModel;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Value extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Value extends AbstractDb
 {
     /**
      * construct

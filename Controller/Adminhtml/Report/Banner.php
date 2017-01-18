@@ -21,6 +21,7 @@
  */
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Report;
+use Magestore\Bannerslider\Controller\Adminhtml\Report;
 
 /**
  * Banner report action
@@ -29,7 +30,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Report;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Banner extends \Magestore\Bannerslider\Controller\Adminhtml\Report
+class Banner extends Report
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory

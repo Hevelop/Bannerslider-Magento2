@@ -22,11 +22,13 @@
 
 namespace Magestore\Bannerslider\Model\ResourceModel\Banner\Grid;
 
+use Magento\Framework\Option\ArrayInterface;
+
 /**
  * Class StatusesArray
  * @package Magestore\Affiliateplusprogram\Model\ResourceModel\Program\Grid
  */
-class StatusesArray implements \Magento\Framework\Option\ArrayInterface
+class StatusesArray implements ArrayInterface
 {
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 2;

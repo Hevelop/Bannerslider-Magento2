@@ -21,6 +21,7 @@
  */
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
+use Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 /**
  * Delete Banner action
@@ -29,7 +30,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Delete extends \Magestore\Bannerslider\Controller\Adminhtml\Banner
+class Delete extends Banner
 {
     public function execute()
     {

@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml;
 
+use Magestore\Bannerslider\Controller\Adminhtml\AbstractAction;
+
 /**
  * CoreSlider Abstract Action
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-abstract class CoreSlider extends \Magestore\Bannerslider\Controller\Adminhtml\AbstractAction
+abstract class CoreSlider extends AbstractAction
 {
     /**
      * Check if admin has permissions to visit related pages.

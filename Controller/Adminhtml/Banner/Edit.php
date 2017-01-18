@@ -21,6 +21,7 @@
  */
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
+use Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 /**
  * Edit Banner action.
@@ -29,7 +30,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Edit extends \Magestore\Bannerslider\Controller\Adminhtml\Banner
+class Edit extends Banner
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory

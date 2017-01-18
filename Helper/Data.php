@@ -22,6 +22,11 @@
 
 namespace Magestore\Bannerslider\Helper;
 
+use Magento\Backend\Model\UrlInterface;
+use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
+use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
+use Magento\Store\Model\StoreManagerInterface;
 use Magestore\Bannerslider\Model\Slider;
 
 /**
@@ -31,41 +36,41 @@ use Magestore\Bannerslider\Model\Slider;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Data extends \Magento\Framework\App\Helper\AbstractHelper
+class Data extends AbstractHelper
 {
     /**
-     * @var \Magento\Backend\Model\UrlInterface
+     * @var UrlInterface
      */
     protected $_backendUrl;
 
     /**
      * Store manager.
      *
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
      * category collection factory.
      *
-     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
+     * @var CollectionFactory
      */
     protected $_categoryCollectionFactory;
 
     /**
      * [__construct description].
      *
-     * @param \Magento\Framework\App\Helper\Context                      $context              [description]
+     * @param Context                      $context              [description]
      * @param \Magento\Directory\Helper\Data                             $directoryData        [description]
      * @param \Magento\Directory\Model\ResourceModel\Country\Collection       $countryCollection    [description]
      * @param \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regCollectionFactory [description]
-     * @param \Magento\Store\Model\StoreManagerInterface                 $storeManager         [description]
+     * @param StoreManagerInterface                 $storeManager         [description]
      */
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
-        \Magento\Backend\Model\UrlInterface $backendUrl,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        Context $context,
+        CollectionFactory $categoryCollectionFactory,
+        UrlInterface $backendUrl,
+        StoreManagerInterface $storeManager
     ) {
         parent::__construct($context);
         $this->_backendUrl = $backendUrl;

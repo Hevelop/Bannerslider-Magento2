@@ -22,6 +22,13 @@
 
 namespace Magestore\Bannerslider\Model;
 
+use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Registry;
+use Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory;
+use Magestore\Bannerslider\Model\ResourceModel\Slider as ResourceModelSlider;
+use Magestore\Bannerslider\Model\ResourceModel\Slider\Collection;
+
 /**
  * Slider Model
  * @category Magestore
@@ -29,7 +36,7 @@ namespace Magestore\Bannerslider\Model;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Slider extends \Magento\Framework\Model\AbstractModel
+class Slider extends AbstractModel
 {
     const XML_CONFIG_BANNERSLIDER = 'bannerslider/general/enable_frontend';
 
@@ -92,25 +99,25 @@ class Slider extends \Magento\Framework\Model\AbstractModel
     /**
      * banner collection factory.
      *
-     * @var \Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory
+     * @var CollectionFactory
      */
     protected $_bannerCollectionFactory;
 
     /**
      * constructor.
      *
-     * @param \Magento\Framework\Model\Context                                $context
-     * @param \Magento\Framework\Registry                                     $registry
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory $bannerCollectionFactory
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Slider                   $resource
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Slider\Collection        $resourceCollection
+     * @param Context                                $context
+     * @param Registry                                     $registry
+     * @param CollectionFactory $bannerCollectionFactory
+     * @param ResourceModelSlider $resource
+     * @param Collection        $resourceCollection
      */
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
-        \Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory $bannerCollectionFactory,
-        \Magestore\Bannerslider\Model\ResourceModel\Slider $resource,
-        \Magestore\Bannerslider\Model\ResourceModel\Slider\Collection $resourceCollection
+        Context $context,
+        Registry $registry,
+        CollectionFactory $bannerCollectionFactory,
+        ResourceModelSlider $resource,
+        Collection $resourceCollection
     ) {
         parent::__construct(
             $context,

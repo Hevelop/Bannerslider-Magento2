@@ -22,6 +22,26 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml;
 
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Helper\Js;
+use Magento\Backend\Model\View\Result\ForwardFactory;
+use Magento\Framework\App\Response\Http\FileFactory;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Image\AdapterFactory;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Result\LayoutFactory;
+use Magento\Framework\View\Result\PageFactory;
+use Magento\MediaStorage\Model\File\UploaderFactory;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Ui\Component\MassAction\Filter;
+use Magestore\Bannerslider\Model\BannerFactory;
+use Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory;
+use Magestore\Bannerslider\Model\ResourceModel\Slider\CollectionFactory as SliderCollectionFactory;
+use Magestore\Bannerslider\Model\SliderFactory;
+use Magestore\Bannerslider\Model\ResourceModel\Banner\Collection;
+
 /**
  * Abstract Action
  * @category Magestore
@@ -29,27 +49,27 @@ namespace Magestore\Bannerslider\Controller\Adminhtml;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-abstract class AbstractAction extends \Magento\Backend\App\Action
+abstract class AbstractAction extends Action
 {
     const PARAM_CRUD_ID = 'entity_id';
 
     /**
-     * @var \Magento\Backend\Helper\Js
+     * @var Js
      */
     protected $_jsHelper;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
-     * @var \Magento\Backend\Model\View\Result\ForwardFactory
+     * @var ForwardFactory
      */
     protected $_resultForwardFactory;
 
     /**
-     * @var \Magento\Framework\View\Result\LayoutFactory
+     * @var LayoutFactory
      */
     protected $_resultLayoutFactory;
 
@@ -58,89 +78,89 @@ abstract class AbstractAction extends \Magento\Backend\App\Action
      * Requires an instance of controller action in order to impose page type,
      * which is by convention is determined from the controller action class.
      *
-     * @var \Magento\Framework\View\Result\PageFactory
+     * @var PageFactory
      */
     protected $_resultPageFactory;
 
     /**
      * Banner factory.
      *
-     * @var \Magestore\Bannerslider\Model\BannerFactory
+     * @var BannerFactory
      */
     protected $_bannerFactory;
 
     /**
      * Slider factory.
      *
-     * @var \Magestore\Bannerslider\Model\SliderFactory
+     * @var SliderFactory
      */
     protected $_sliderFactory;
 
     /**
      * Banner Collection Factory.
      *
-     * @var \Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory
+     * @var CollectionFactory
      */
     protected $_bannerCollectionFactory;
 
     /**
      * Registry object.
      *
-     * @var \Magento\Framework\Registry
+     * @var Registry
      */
     protected $_coreRegistry;
 
     /**
      * File Factory.
      *
-     * @var \Magento\Framework\App\Response\Http\FileFactory
+     * @var FileFactory
      */
     protected $_fileFactory;
 
     /**
-     * @var \Magento\Ui\Component\MassAction\Filter
+     * @var Filter
      */
     protected $_massActionFilter;
 
     /**
-     * @var \Magento\MediaStorage\Model\File\UploaderFactory
+     * @var UploaderFactory
      */
     protected $_uploaderFactory;
 
     /**
-     * @var \Magento\Framework\Image\AdapterFactory
+     * @var AdapterFactory
      */
     protected $_adapterFactory;
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magestore\Bannerslider\Model\BannerFactory $bannerFactory
-     * @param \Magestore\Bannerslider\Model\SliderFactory $sliderFactory
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory $bannerCollectionFactory
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Slider\CollectionFactory $sliderCollectionFactory
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Framework\App\Response\Http\FileFactory $fileFactory
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     * @param \Magento\Framework\View\Result\LayoutFactory $resultLayoutFactory
-     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Backend\Helper\Js $jsHelper
+     * @param Context $context
+     * @param BannerFactory $bannerFactory
+     * @param SliderFactory $sliderFactory
+     * @param CollectionFactory $bannerCollectionFactory
+     * @param SliderCollectionFactory $sliderCollectionFactory
+     * @param Registry $coreRegistry
+     * @param FileFactory $fileFactory
+     * @param PageFactory $resultPageFactory
+     * @param LayoutFactory $resultLayoutFactory
+     * @param ForwardFactory $resultForwardFactory
+     * @param StoreManagerInterface $storeManager
+     * @param Js $jsHelper
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magestore\Bannerslider\Model\BannerFactory $bannerFactory,
-        \Magestore\Bannerslider\Model\SliderFactory $sliderFactory,
-        \Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory $bannerCollectionFactory,
-        \Magestore\Bannerslider\Model\ResourceModel\Slider\CollectionFactory $sliderCollectionFactory,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magento\Framework\App\Response\Http\FileFactory $fileFactory,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Magento\Framework\View\Result\LayoutFactory $resultLayoutFactory,
-        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Backend\Helper\Js $jsHelper,
-        \Magento\Ui\Component\MassAction\Filter $massActionFilter,
-        \Magento\MediaStorage\Model\File\UploaderFactory $uploaderFactory,
-        \Magento\Framework\Image\AdapterFactory $adapterFactory
+        Context $context,
+        BannerFactory $bannerFactory,
+        SliderFactory $sliderFactory,
+        CollectionFactory $bannerCollectionFactory,
+        SliderCollectionFactory $sliderCollectionFactory,
+        Registry $coreRegistry,
+        FileFactory $fileFactory,
+        PageFactory $resultPageFactory,
+        LayoutFactory $resultLayoutFactory,
+        ForwardFactory $resultForwardFactory,
+        StoreManagerInterface $storeManager,
+        Js $jsHelper,
+        Filter $massActionFilter,
+        UploaderFactory $uploaderFactory,
+        AdapterFactory $adapterFactory
     ) {
         parent::__construct($context);
         $this->_coreRegistry = $coreRegistry;
@@ -163,15 +183,15 @@ abstract class AbstractAction extends \Magento\Backend\App\Action
 
 
     /**
-     * @return \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+     * @return AbstractCollection
      *
      * @throws LocalizedException
      */
     protected function _createMainCollection()
     {
-        /** @var \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection $collection */
-        $collection = $this->_objectManager->create('Magestore\Bannerslider\Model\ResourceModel\Banner\Collection');
-        if (!$collection instanceof \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection) {
+        /** @var AbstractCollection $collection */
+        $collection = $this->_objectManager->create(Collection::class);
+        if (!$collection instanceof AbstractCollection) {
             throw new LocalizedException(
                 __(
                     '%1 isn\'t instance of Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection',
@@ -186,12 +206,12 @@ abstract class AbstractAction extends \Magento\Backend\App\Action
     /**
      * Get back result redirect after add/edit.
      *
-     * @param \Magento\Framework\Controller\Result\Redirect $resultRedirect
+     * @param Redirect $resultRedirect
      * @param null                                          $paramCrudId
      *
-     * @return \Magento\Framework\Controller\Result\Redirect
+     * @return Redirect
      */
-    protected function _getBackResultRedirect(\Magento\Framework\Controller\Result\Redirect $resultRedirect, $paramCrudId = null)
+    protected function _getBackResultRedirect(Redirect $resultRedirect, $paramCrudId = null)
     {
         switch ($this->getRequest()->getParam('back')) {
             case 'edit':

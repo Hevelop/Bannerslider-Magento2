@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Model\ResourceModel;
 
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+
 /**
  * Slider Resource Model
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Model\ResourceModel;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Slider extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Slider extends AbstractDb
 {
     /**
      * construct

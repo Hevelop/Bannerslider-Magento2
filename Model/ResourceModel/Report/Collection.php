@@ -22,6 +22,17 @@
 
 namespace Magestore\Bannerslider\Model\ResourceModel\Report;
 
+use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
+use Magento\Framework\Data\Collection\EntityFactoryInterface;
+use Magento\Framework\Event\ManagerInterface;
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Magento\Framework\Stdlib\DateTime\Timezone;
+use Magento\Store\Model\StoreManagerInterface;
+use Magestore\Bannerslider\Model\Report;
+use Magestore\Bannerslider\Model\ResourceModel\Report as ResourceModelReport;
+use Psr\Log\LoggerInterface;
+
 /**
  * Report Collection
  * @category Magestore
@@ -29,7 +40,7 @@ namespace Magestore\Bannerslider\Model\ResourceModel\Report;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+class Collection extends AbstractCollection
 {
     const REPORT_TYPE_ALL_SLIDER = '1';
     const REPORT_TYPE_PER_SLIDER = '2';
@@ -44,7 +55,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_storeViewId = null;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
@@ -60,7 +71,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_isLoadSliderTitle = FALSE;
 
     /**
-     * @var \Magento\Framework\Stdlib\DateTime\Timezone
+     * @var Timezone
      */
     protected $_stdTimezone;
 
@@ -70,26 +81,26 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init('Magestore\Bannerslider\Model\Report', 'Magestore\Bannerslider\Model\ResourceModel\Report');
+        $this->_init(Report::class, ResourceModelReport::class);
     }
 
     /**
-     * @param \Magento\Framework\Data\Collection\EntityFactoryInterface    $entityFactory
-     * @param \Psr\Log\LoggerInterface                                     $logger
-     * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
-     * @param \Magento\Framework\Event\ManagerInterface                    $eventManager
+     * @param EntityFactoryInterface    $entityFactory
+     * @param LoggerInterface                                     $logger
+     * @param FetchStrategyInterface $fetchStrategy
+     * @param ManagerInterface                    $eventManager
      * @param \Zend_Db_Adapter_Abstract                                    $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb              $resource
+     * @param AbstractDb              $resource
      */
     public function __construct(
-        \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
-        \Psr\Log\LoggerInterface $logger,
-        \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
-        \Magento\Framework\Event\ManagerInterface $eventManager,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\Stdlib\DateTime\Timezone $stdTimezone,
+        EntityFactoryInterface $entityFactory,
+        LoggerInterface $logger,
+        FetchStrategyInterface $fetchStrategy,
+        ManagerInterface $eventManager,
+        StoreManagerInterface $storeManager,
+        Timezone $stdTimezone,
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_storeManager = $storeManager;

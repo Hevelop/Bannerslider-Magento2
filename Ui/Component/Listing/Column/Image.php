@@ -22,8 +22,12 @@
 
 namespace Magestore\Bannerslider\Ui\Component\Listing\Column;
 
+use Magento\Framework\Filesystem;
+use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Store\Model\StoreManagerInterface;
+use Magestore\Bannerslider\Ui\Component\Listing\Column\AbstractColumn;
 
 /**
  * @category Magestore
@@ -31,7 +35,7 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
  * @module   Storelocator
  * @author   Magestore Developer
  */
-class Image extends \Magestore\Bannerslider\Ui\Component\Listing\Column\AbstractColumn
+class Image extends AbstractColumn
 {
     /**
      * default width and height image.
@@ -41,23 +45,25 @@ class Image extends \Magestore\Bannerslider\Ui\Component\Listing\Column\Abstract
     const IMAGE_STYLE = 'display: block;margin: auto;';
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
      * Constructor.
      *
-     * @param ContextInterface   $context
+     * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
-     * @param array              $components
-     * @param array              $data
+     * @param Filesystem $filesystem
+     * @param StoreManagerInterface $storeManager
+     * @param array $components
+     * @param array $data
      */
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
-        \Magento\Framework\Filesystem $filesystem,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        Filesystem $filesystem,
+        StoreManagerInterface $storeManager,
         array $components = [],
         array $data = []
     ) {
@@ -80,7 +86,7 @@ class Image extends \Magestore\Bannerslider\Ui\Component\Listing\Column\Abstract
         if (isset($item[$this->getData('name')])) {
             if ($item[$this->getData('name')]) {
                 $srcImage = $this->_storeManager->getStore()
-                        ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $item[$this->getData('name')];
+                        ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $item[$this->getData('name')];
                 $item[$this->getData('name')] = sprintf(
                     '<img src="%s"  width="%s" height="%s" style="%s" />',
                     $srcImage,

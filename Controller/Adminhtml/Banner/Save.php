@@ -23,6 +23,7 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 /**
  * Save Banner action.
@@ -31,7 +32,7 @@ use Magento\Framework\App\Filesystem\DirectoryList;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Save extends \Magestore\Bannerslider\Controller\Adminhtml\Banner
+class Save extends Banner
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory

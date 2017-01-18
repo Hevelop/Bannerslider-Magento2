@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
 
+use Magestore\Bannerslider\Controller\Adminhtml\Slider;
+
 /**
  * Slider Index action
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Index extends \Magestore\Bannerslider\Controller\Adminhtml\Slider
+class Index extends Slider
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory

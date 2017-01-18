@@ -22,6 +22,12 @@
 
 namespace Magestore\Bannerslider\Model;
 
+use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Registry;
+use Magestore\Bannerslider\Model\ResourceModel\Value as ResourceModelValue;
+use Magestore\Bannerslider\Model\ResourceModel\Value\Collection;
+
 /**
  * Value Model
  * @category Magestore
@@ -29,21 +35,21 @@ namespace Magestore\Bannerslider\Model;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Value extends \Magento\Framework\Model\AbstractModel
+class Value extends AbstractModel
 {
     /**
      * constructor.
      *
-     * @param \Magento\Framework\Model\Context                        $context
-     * @param \Magento\Framework\Registry                             $registry
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Value            $resource
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Value\Collection $resourceCollection
+     * @param Context                        $context
+     * @param Registry                             $registry
+     * @param ResourceModelValue $resource
+     * @param Collection $resourceCollection
      */
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
-        \Magestore\Bannerslider\Model\ResourceModel\Value $resource,
-        \Magestore\Bannerslider\Model\ResourceModel\Value\Collection $resourceCollection
+        Context $context,
+        Registry $registry,
+        ResourceModelValue $resource,
+        Collection $resourceCollection
     ) {
         parent::__construct(
             $context,

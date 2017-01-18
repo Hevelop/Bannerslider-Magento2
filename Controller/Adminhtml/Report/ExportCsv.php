@@ -23,6 +23,8 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Report;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magestore\Bannerslider\Block\Adminhtml\Report\Grid;
+use Magestore\Bannerslider\Controller\Adminhtml\Report;
 
 /**
  * ExportCsv action
@@ -31,7 +33,7 @@ use Magento\Framework\App\Filesystem\DirectoryList;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class ExportCsv extends \Magestore\Bannerslider\Controller\Adminhtml\Report
+class ExportCsv extends Report
 {
     public function execute()
     {
@@ -39,7 +41,7 @@ class ExportCsv extends \Magestore\Bannerslider\Controller\Adminhtml\Report
 
         /** @var \\Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $content = $resultPage->getLayout()->createBlock('Magestore\Bannerslider\Block\Adminhtml\Report\Grid')->getCsv();
+        $content = $resultPage->getLayout()->createBlock(Grid::class)->getCsv();
 
         return $this->_fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }

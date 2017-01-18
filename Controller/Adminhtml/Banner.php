@@ -22,6 +22,9 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml;
 
+use Magento\Framework\Controller\Result\Redirect;
+use Magestore\Bannerslider\Controller\Adminhtml\AbstractAction;
+
 /**
  * Banner Abstract Action
  * @category Magestore
@@ -29,7 +32,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-abstract class Banner extends \Magestore\Bannerslider\Controller\Adminhtml\AbstractAction
+abstract class Banner extends AbstractAction
 {
     const PARAM_CRUD_ID = 'banner_id';
 
@@ -46,12 +49,12 @@ abstract class Banner extends \Magestore\Bannerslider\Controller\Adminhtml\Abstr
     /**
      * Get back result redirect after add/edit.
      *
-     * @param \Magento\Framework\Controller\Result\Redirect $resultRedirect
+     * @param Redirect $resultRedirect
      * @param null                                          $paramCrudId
      *
-     * @return \Magento\Framework\Controller\Result\Redirect
+     * @return Redirect
      */
-    protected function _getBackResultRedirect(\Magento\Framework\Controller\Result\Redirect $resultRedirect, $paramCrudId = null)
+    protected function _getBackResultRedirect(Redirect $resultRedirect, $paramCrudId = null)
     {
         switch ($this->getRequest()->getParam('back')) {
             case 'edit':

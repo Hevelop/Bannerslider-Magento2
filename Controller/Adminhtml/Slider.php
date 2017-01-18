@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml;
 
+use Magestore\Bannerslider\Controller\Adminhtml\AbstractAction;
+
 /**
  * Slider Abstract Action
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-abstract class Slider extends \Magestore\Bannerslider\Controller\Adminhtml\AbstractAction
+abstract class Slider extends AbstractAction
 {
     const PARAM_CRUD_ID = 'slider_id';
 

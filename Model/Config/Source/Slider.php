@@ -21,30 +21,50 @@
 
 namespace Magestore\Bannerslider\Model\Config\Source;
 
-class Slider implements \Magento\Framework\Option\ArrayInterface
+use Magento\Framework\Option\ArrayInterface;
+use Magestore\Bannerslider\Model\SliderFactory;
+
+class Slider implements ArrayInterface
 {
+
+    /**
+     * @var SliderFactory
+     */
     protected $sliderFactory;
 
+
+    /**
+     * Slider constructor.
+     * @param SliderFactory $sliderFactory
+     */
     public function __construct(
-        \Magestore\Bannerslider\Model\SliderFactory $sliderFactory
+        SliderFactory $sliderFactory
     ) {
         $this->sliderFactory = $sliderFactory;
     }
 
+
+    /**
+     * @return array
+     */
     public function getSliders()
     {
         $sliderModel = $this->sliderFactory->create();
         return $sliderModel->getCollection()->getData();
     }
 
+
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         $sliders = [];
         foreach ($this->getSliders() as $slider) {
-            array_push($sliders,[
+            $sliders[] = [
                 'value' => $slider['slider_id'],
                 'label' => $slider['title']
-            ]);
+            ];
         }
         return $sliders;
     }

@@ -22,6 +22,9 @@
 
 namespace Magestore\Bannerslider\Controller\Index;
 
+use Magestore\Bannerslider\Controller\Index;
+use Magestore\Bannerslider\Model\Slider;
+
 /**
  * Impress action
  * @category Magestore
@@ -29,7 +32,7 @@ namespace Magestore\Bannerslider\Controller\Index;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Impress extends \Magestore\Bannerslider\Controller\Index
+class Impress extends Index
 {
     /**
      * Default customer account page.
@@ -43,7 +46,7 @@ class Impress extends \Magestore\Bannerslider\Controller\Index
         $slider = $this->_sliderFactory->create()->load($sliderId);
         if ($slider->getId()) {
             $sliderOwnBannerCollection = $slider->getOwnBanerCollection();
-            if ($slider->getStyleSlide() == \Magestore\Bannerslider\Model\Slider::STYLESLIDE_POPUP) {
+            if ($slider->getStyleSlide() == Slider::STYLESLIDE_POPUP) {
                 $sliderOwnBannerCollection->setPageSize(1)->setCurPage(1);
             }
             $bannerIds = $sliderOwnBannerCollection->getColumnValues('banner_id');

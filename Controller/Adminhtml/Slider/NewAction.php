@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
 
+use Magestore\Bannerslider\Controller\Adminhtml\Slider;
+
 /**
  * New Slider Action
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class NewAction extends \Magestore\Bannerslider\Controller\Adminhtml\Slider
+class NewAction extends Slider
 {
     public function execute()
     {

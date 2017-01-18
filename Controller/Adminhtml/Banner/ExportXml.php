@@ -23,6 +23,8 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magestore\Bannerslider\Block\Adminhtml\Banner\Grid;
+use Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 /**
  * ExportXml action
@@ -31,7 +33,7 @@ use Magento\Framework\App\Filesystem\DirectoryList;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class ExportXml extends \Magestore\Bannerslider\Controller\Adminhtml\Banner
+class ExportXml extends Banner
 {
     public function execute()
     {
@@ -39,7 +41,7 @@ class ExportXml extends \Magestore\Bannerslider\Controller\Adminhtml\Banner
 
         /** @var \\Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $content = $resultPage->getLayout()->createBlock('Magestore\Bannerslider\Block\Adminhtml\Banner\Grid')->getXml();
+        $content = $resultPage->getLayout()->createBlock(Grid::class)->getXml();
 
         return $this->_fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }

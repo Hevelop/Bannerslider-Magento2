@@ -37,7 +37,7 @@ class Status
     /**
      * get available statuses.
      *
-     * @return []
+     * @return array
      */
     public static function getAvailableStatuses()
     {

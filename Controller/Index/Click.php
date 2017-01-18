@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Index;
 
+use Magestore\Bannerslider\Controller\Index;
+
 /**
  * Click action
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Index;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Click extends \Magestore\Bannerslider\Controller\Index
+class Click extends Index
 {
     /**
      * Default customer account page.

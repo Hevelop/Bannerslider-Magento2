@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
 
+use Magestore\Bannerslider\Controller\Adminhtml\Slider;
+
 /**
  * Preview Slider action
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Preview extends \Magestore\Bannerslider\Controller\Adminhtml\Slider
+class Preview extends Slider
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory

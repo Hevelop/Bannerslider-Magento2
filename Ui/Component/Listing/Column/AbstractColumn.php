@@ -22,7 +22,9 @@
 
 namespace Magestore\Bannerslider\Ui\Component\Listing\Column;
 
-abstract class AbstractColumn extends \Magento\Ui\Component\Listing\Columns\Column
+use Magento\Ui\Component\Listing\Columns\Column;
+
+abstract class AbstractColumn extends Column
 {
     /**
      * Prepare Data Source

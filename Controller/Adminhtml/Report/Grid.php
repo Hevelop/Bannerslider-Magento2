@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Report;
 
+use Magestore\Bannerslider\Controller\Adminhtml\Report;
+
 /**
  * Report grid action.
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Report;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Grid extends \Magestore\Bannerslider\Controller\Adminhtml\Report
+class Grid extends Report
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory

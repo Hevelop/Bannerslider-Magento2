@@ -22,8 +22,12 @@
 
 namespace Magestore\Bannerslider\Ui\Component\Listing\Column;
 
+use Magento\Framework\Filesystem;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Store\Model\StoreManagerInterface;
+use Magestore\Bannerslider\Model\SliderFactory;
+use Magestore\Bannerslider\Ui\Component\Listing\Column\AbstractColumn;
 
 /**
  * @category Magestore
@@ -31,32 +35,36 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
  * @module   Storelocator
  * @author   Magestore Developer
  */
-class Slider extends \Magestore\Bannerslider\Ui\Component\Listing\Column\AbstractColumn
+class Slider extends AbstractColumn
 {
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
-     * @var \Magestore\Bannerslider\Model\SliderFactory
+     * @var SliderFactory
      */
     protected $_sliderFactory;
+
     /**
      * Constructor.
      *
-     * @param ContextInterface   $context
+     * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
-     * @param array              $components
-     * @param array              $data
+     * @param Filesystem $filesystem
+     * @param StoreManagerInterface $storeManager
+     * @param SliderFactory $sliderFactory
+     * @param array $components
+     * @param array $data
      */
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
-        \Magento\Framework\Filesystem $filesystem,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magestore\Bannerslider\Model\SliderFactory $sliderFactory,
+        Filesystem $filesystem,
+        StoreManagerInterface $storeManager,
+        SliderFactory $sliderFactory,
         array $components = [],
         array $data = []
     ) {

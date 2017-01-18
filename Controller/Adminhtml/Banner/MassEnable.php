@@ -23,6 +23,7 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 use Magento\Framework\Controller\ResultFactory;
+use Magestore\Bannerslider\Controller\Adminhtml\AbstractAction;
 use Magestore\Bannerslider\Model\ResourceModel\Banner\Grid\StatusesArray;
 /**
  * MassDelete action.
@@ -31,7 +32,7 @@ use Magestore\Bannerslider\Model\ResourceModel\Banner\Grid\StatusesArray;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class MassEnable extends \Magestore\Bannerslider\Controller\Adminhtml\AbstractAction
+class MassEnable extends AbstractAction
 {
 
     /**

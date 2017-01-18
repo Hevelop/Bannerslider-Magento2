@@ -22,6 +22,12 @@
 
 namespace Magestore\Bannerslider\Model;
 
+use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Registry;
+use Magestore\Bannerslider\Model\ResourceModel\Report as ResourceModelReport;
+use Magestore\Bannerslider\Model\ResourceModel\Report\Collection;
+
 /**
  * Report Model
  * @category Magestore
@@ -29,13 +35,20 @@ namespace Magestore\Bannerslider\Model;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Report extends \Magento\Framework\Model\AbstractModel
+class Report extends AbstractModel
 {
+    /**
+     * Report constructor.
+     * @param Context $context
+     * @param Registry $registry
+     * @param ResourceModelReport $resource
+     * @param Collection $resourceCollection
+     */
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
-        \Magestore\Bannerslider\Model\ResourceModel\Report $resource,
-        \Magestore\Bannerslider\Model\ResourceModel\Report\Collection $resourceCollection
+        Context $context,
+        Registry $registry,
+        ResourceModelReport $resource,
+        Collection $resourceCollection
     ) {
         parent::__construct(
             $context,

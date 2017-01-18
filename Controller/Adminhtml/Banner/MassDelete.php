@@ -23,6 +23,8 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 use Magento\Framework\Controller\ResultFactory;
+use Magestore\Bannerslider\Controller\Adminhtml\AbstractAction;
+
 /**
  * MassDelete action.
  * @category Magestore
@@ -30,7 +32,7 @@ use Magento\Framework\Controller\ResultFactory;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class MassDelete extends \Magestore\Bannerslider\Controller\Adminhtml\AbstractAction
+class MassDelete extends AbstractAction
 {
 
     /**

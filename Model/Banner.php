@@ -22,6 +22,18 @@
 
 namespace Magestore\Bannerslider\Model;
 
+use Magento\Framework\Logger\Monolog;
+use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Registry;
+use Magento\Store\Model\StoreManagerInterface;
+use Magestore\Bannerslider\Model\BannerFactory;
+use Magestore\Bannerslider\Model\ResourceModel\Banner as ResourceModelBanner;
+use Magestore\Bannerslider\Model\ResourceModel\Banner\Collection;
+use Magestore\Bannerslider\Model\ResourceModel\Slider\CollectionFactory;
+use Magestore\Bannerslider\Model\ResourceModel\Value\CollectionFactory as ResourceModelValueCollectionFactory;
+use Magestore\Bannerslider\Model\ValueFactory;
+
 /**
  * Banner Model
  * @category Magestore
@@ -29,7 +41,7 @@ namespace Magestore\Bannerslider\Model;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Banner extends \Magento\Framework\Model\AbstractModel
+class Banner extends AbstractModel
 {
     const BASE_MEDIA_PATH = 'magestore/bannerslider/images';
 
@@ -40,7 +52,7 @@ class Banner extends \Magento\Framework\Model\AbstractModel
     /**
      * slider colleciton factory.
      *
-     * @var \Magestore\Bannerslider\Model\ResourceModel\Slider\CollectionFactory
+     * @var CollectionFactory
      */
     protected $_sliderCollectionFactory;
 
@@ -54,21 +66,21 @@ class Banner extends \Magento\Framework\Model\AbstractModel
     /**
      * banner factory.
      *
-     * @var \Magestore\Bannerslider\Model\BannerFactory
+     * @var BannerFactory
      */
     protected $_bannerFactory;
 
     /**
      * value factory.
      *
-     * @var \Magestore\Bannerslider\Model\ValueFactory
+     * @var ValueFactory
      */
     protected $_valueFactory;
 
     /**
      * value collecion factory.
      *
-     * @var \Magestore\Bannerslider\Model\ResourceModel\Value\CollectionFactory
+     * @var ResourceModelValueCollectionFactory
      */
     protected $_valueCollectionFactory;
 
@@ -80,40 +92,42 @@ class Banner extends \Magento\Framework\Model\AbstractModel
     protected $_formFieldHtmlIdPrefix = 'page_';
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
      * logger.
      *
-     * @var \Magento\Framework\Logger\Monolog
+     * @var Monolog
      */
     protected $_monolog;
 
     /**
      * [__construct description].
      *
-     * @param \Magento\Framework\Model\Context                                $context
-     * @param \Magento\Framework\Registry                                     $registry
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Banner                   $resource
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection        $resourceCollection
-     * @param \Magestore\Bannerslider\Model\BannerFactory                     $bannerFactory
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Slider\CollectionFactory $sliderCollectionFactory
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Value\CollectionFactory  $valueCollectionFactory
-     * @param \Magento\Store\Model\StoreManagerInterface                      $storeManager
+     * @param Context $context
+     * @param Registry $registry
+     * @param ResourceModelBanner $resource
+     * @param Collection $resourceCollection
+     * @param BannerFactory $bannerFactory
+     * @param \Magestore\Bannerslider\Model\ValueFactory $valueFactory
+     * @param CollectionFactory $sliderCollectionFactory
+     * @param ResourceModelValueCollectionFactory $valueCollectionFactory
+     * @param StoreManagerInterface $storeManager
+     * @param Monolog $monolog
      */
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
-        \Magestore\Bannerslider\Model\ResourceModel\Banner $resource,
-        \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection $resourceCollection,
-        \Magestore\Bannerslider\Model\BannerFactory $bannerFactory,
-        \Magestore\Bannerslider\Model\ValueFactory $valueFactory,
-        \Magestore\Bannerslider\Model\ResourceModel\Slider\CollectionFactory $sliderCollectionFactory,
-        \Magestore\Bannerslider\Model\ResourceModel\Value\CollectionFactory $valueCollectionFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\Logger\Monolog $monolog
+        Context $context,
+        Registry $registry,
+        ResourceModelBanner $resource,
+        Collection $resourceCollection,
+        BannerFactory $bannerFactory,
+        ValueFactory $valueFactory,
+        CollectionFactory $sliderCollectionFactory,
+        ResourceModelValueCollectionFactory $valueCollectionFactory,
+        StoreManagerInterface $storeManager,
+        Monolog $monolog
     ) {
         parent::__construct(
             $context,
@@ -199,6 +213,8 @@ class Banner extends \Magento\Framework\Model\AbstractModel
      * set store view id.
      *
      * @param int $storeViewId
+     *
+     * @return $this
      */
     public function setStoreViewId($storeViewId)
     {
@@ -274,7 +290,7 @@ class Banner extends \Magento\Framework\Model\AbstractModel
             foreach ($attributeValue as $model) {
                 if ($this->getData($model->getData('attribute_code') . '_in_store')) {
                     try {
-                        if ($model->getData('attribute_code') == 'image' && $this->getData('delete_image')) {
+                        if ($model->getData('attribute_code') === 'image' && $this->getData('delete_image')) {
                             $model->delete();
                         } else {
                             $model->setValue($this->getData($model->getData('attribute_code') . '_value'))->save();

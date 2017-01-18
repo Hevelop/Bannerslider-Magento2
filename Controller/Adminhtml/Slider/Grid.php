@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
 
+use Magestore\Bannerslider\Controller\Adminhtml\Slider;
+
 /**
  * Slider Grid action
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Grid extends \Magestore\Bannerslider\Controller\Adminhtml\Slider
+class Grid extends Slider
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory

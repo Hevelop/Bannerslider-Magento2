@@ -21,6 +21,9 @@
  */
 
 namespace Magestore\Bannerslider\Model\ResourceModel\Value;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Magestore\Bannerslider\Model\ResourceModel\Value as ResourceModelValue;
+use Magestore\Bannerslider\Model\Value;
 
 /**
  * Value Collection
@@ -29,7 +32,7 @@ namespace Magestore\Bannerslider\Model\ResourceModel\Value;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+class Collection extends AbstractCollection
 {
     /**
      * construct
@@ -37,6 +40,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init('Magestore\Bannerslider\Model\Value', 'Magestore\Bannerslider\Model\ResourceModel\Value');
+        $this->_init(Value::class , ResourceModelValue::class);
     }
 }

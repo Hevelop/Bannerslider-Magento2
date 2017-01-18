@@ -21,6 +21,17 @@
  */
 
 namespace Magestore\Bannerslider\Controller;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\Result\RawFactory;
+use Magento\Framework\HTTP\PhpEnvironment\Request;
+use Magento\Framework\Logger\Monolog;
+use Magento\Framework\Stdlib\CookieManagerInterface;
+use Magento\Framework\Stdlib\DateTime\Timezone;
+use Magestore\Bannerslider\Model\BannerFactory;
+use Magestore\Bannerslider\Model\ReportFactory;
+use Magestore\Bannerslider\Model\ResourceModel\Report\CollectionFactory;
+use Magestore\Bannerslider\Model\SliderFactory;
 
 /**
  * Index action
@@ -29,33 +40,33 @@ namespace Magestore\Bannerslider\Controller;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-abstract class Index extends \Magento\Framework\App\Action\Action
+abstract class Index extends Action
 {
     /**
      * Slider factory.
      *
-     * @var \Magestore\Bannerslider\Model\SliderFactory
+     * @var SliderFactory
      */
     protected $_sliderFactory;
 
     /**
      * banner factory.
      *
-     * @var \Magestore\Bannerslider\Model\BannerFactory
+     * @var BannerFactory
      */
     protected $_bannerFactory;
 
     /**
      * Report factory.
      *
-     * @var \Magestore\Bannerslider\Model\ReportFactory
+     * @var ReportFactory
      */
     protected $_reportFactory;
 
     /**
      * Report collection factory.
      *
-     * @var \Magestore\Bannerslider\Model\ResourceModel\Report\CollectionFactory
+     * @var CollectionFactory
      */
     protected $_reportCollectionFactory;
 
@@ -63,7 +74,7 @@ abstract class Index extends \Magento\Framework\App\Action\Action
      * A result that contains raw response - may be good for passing through files
      * returning result of downloads or some other binary contents.
      *
-     * @var \Magento\Framework\Controller\Result\RawFactory
+     * @var RawFactory
      */
     protected $_resultRawFactory;
 
@@ -71,14 +82,14 @@ abstract class Index extends \Magento\Framework\App\Action\Action
     /**
      * logger.
      *
-     * @var \Magento\Framework\Logger\Monolog
+     * @var Monolog
      */
     protected $_monolog;
 
     /**
      * stdlib timezone.
      *
-     * @var \Magento\Framework\Stdlib\DateTime\Timezone
+     * @var Timezone
      */
     protected $_stdTimezone;
 
@@ -89,25 +100,24 @@ abstract class Index extends \Magento\Framework\App\Action\Action
     /**
      * Index constructor.
      *
-     * @param \Magento\Framework\App\Action\Context                                $context
-     * @param \Magestore\Bannerslider\Model\SliderFactory                          $sliderFactory
-     * @param \Magestore\Bannerslider\Model\BannerFactory                          $bannerFactory
-     * @param \Magestore\Bannerslider\Model\ReportFactory                          $reportFactory
-     * @param \Magestore\Bannerslider\Model\ResourceModel\Report\CollectionFactory $reportCollectionFactory
-     * @param \Magento\Framework\Controller\Result\RawFactory                      $resultRawFactory
-     * @param \Magento\Framework\Logger\Monolog                                    $monolog
-     * @param \Magento\Framework\Stdlib\DateTime\Timezone                          $stdTimezone
+     * @param Context                                $context
+     * @param SliderFactory                          $sliderFactory
+     * @param BannerFactory                          $bannerFactory
+     * @param ReportFactory                          $reportFactory
+     * @param CollectionFactory $reportCollectionFactory
+     * @param RawFactory                      $resultRawFactory
+     * @param Monolog                                    $monolog
+     * @param Timezone                          $stdTimezone
      */
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magestore\Bannerslider\Model\SliderFactory $sliderFactory,
-        \Magestore\Bannerslider\Model\BannerFactory $bannerFactory,
-        \Magestore\Bannerslider\Model\ReportFactory $reportFactory,
-        \Magestore\Bannerslider\Model\ResourceModel\Report\CollectionFactory $reportCollectionFactory,
-        \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
-        \Magento\Framework\Logger\Monolog $monolog,
-        \Magento\Framework\Stdlib\DateTime\Timezone $stdTimezone,
-        \Magento\Framework\ObjectManagerInterface $objectManager
+        Context $context,
+        SliderFactory $sliderFactory,
+        BannerFactory $bannerFactory,
+        ReportFactory $reportFactory,
+        CollectionFactory $reportCollectionFactory,
+        RawFactory $resultRawFactory,
+        Monolog $monolog,
+        Timezone $stdTimezone
     ) {
         parent::__construct($context);
         $this->_sliderFactory = $sliderFactory;
@@ -118,12 +128,12 @@ abstract class Index extends \Magento\Framework\App\Action\Action
         $this->_resultRawFactory = $resultRawFactory;
         $this->_monolog = $monolog;
         $this->_stdTimezone = $stdTimezone;
-        $this->_objectManager = $objectManager;
+        $this->_objectManager = $context->getObjectManager();
     }
 
 
     public function getCookieManager(){
-        return $this->_objectManager->create('Magento\Framework\Stdlib\CookieManagerInterface');
+        return $this->_objectManager->create(CookieManagerInterface::class);
     }
     /**
      * get user code.
@@ -134,8 +144,7 @@ abstract class Index extends \Magento\Framework\App\Action\Action
      */
     protected function getUserCode($id)
     {
-        $ipAddress = $this->_objectManager->create('Magento\Framework\HTTP\PhpEnvironment\Request')->getClientIp(true);
-//        var_dump($ipAddress);die('ssssssss');
+        $ipAddress = $this->_objectManager->create(Request::class)->getClientIp(true);
         $cookiefrontend = $this->getCookieManager()->getCookie('frontend');
         $usercode = $ipAddress.$cookiefrontend.$id;
 

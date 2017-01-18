@@ -22,6 +22,8 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
+use Magestore\Bannerslider\Controller\Adminhtml\Banner;
+
 /**
  * NewAction
  * @category Magestore
@@ -29,7 +31,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class NewAction extends \Magestore\Bannerslider\Controller\Adminhtml\Banner
+class NewAction extends Banner
 {
     public function execute()
     {

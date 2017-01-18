@@ -22,6 +22,7 @@
 
 namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
 
+use Magestore\Bannerslider\Controller\Adminhtml\Slider as AdminhtmlSlider;
 use Magestore\Bannerslider\Model\Slider;
 
 /**
@@ -31,7 +32,7 @@ use Magestore\Bannerslider\Model\Slider;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class Save extends \Magestore\Bannerslider\Controller\Adminhtml\Slider
+class Save extends AdminhtmlSlider
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory

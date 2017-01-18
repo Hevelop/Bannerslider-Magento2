@@ -23,7 +23,10 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
 
 use Magento\Framework\Controller\ResultFactory;
+use Magestore\Bannerslider\Controller\Adminhtml\AbstractAction;
 use Magestore\Bannerslider\Model\ResourceModel\Banner\Grid\StatusesArray;
+use Magestore\Bannerslider\Model\ResourceModel\Slider\Collection;
+
 /**
  * MassDelete action.
  * @category Magestore
@@ -31,7 +34,7 @@ use Magestore\Bannerslider\Model\ResourceModel\Banner\Grid\StatusesArray;
  * @module   Bannerslider
  * @author   Magestore Developer
  */
-class MassEnable extends \Magestore\Bannerslider\Controller\Adminhtml\AbstractAction
+class MassEnable extends AbstractAction
 {
 
     /**
@@ -42,7 +45,7 @@ class MassEnable extends \Magestore\Bannerslider\Controller\Adminhtml\AbstractAc
      */
     public function execute()
     {
-        $sliderCollection = $this->_objectManager->create('Magestore\Bannerslider\Model\ResourceModel\Slider\Collection');
+        $sliderCollection = $this->_objectManager->create(Collection::class);
         $collection = $this->_massActionFilter->getCollection($sliderCollection);
         $collectionSize = $collection->getSize();
         foreach ($collection as $item) {
