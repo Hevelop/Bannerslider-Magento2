@@ -23,7 +23,7 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magestore\Bannerslider\Block\Adminhtml\Banner\Grid;
+use Magestore\Bannerslider\Block\Adminhtml\Banner\Grid as BannerGrid;
 use Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 /**
@@ -41,7 +41,7 @@ class ExportExcel extends Banner
 
         /** @var \\Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $content = $resultPage->getLayout()->createBlock(Grid::class)->getExcel();
+        $content = $resultPage->getLayout()->createBlock(BannerGrid::class)->getExcel();
 
         return $this->_fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }

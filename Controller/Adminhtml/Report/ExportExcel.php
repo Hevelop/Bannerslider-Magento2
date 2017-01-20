@@ -23,7 +23,7 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Report;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magestore\Bannerslider\Block\Adminhtml\Report\Grid;
+use Magestore\Bannerslider\Block\Adminhtml\Report\Grid as ReportGrid;
 use Magestore\Bannerslider\Controller\Adminhtml\Report;
 
 /**
@@ -41,7 +41,7 @@ class ExportExcel extends Report
 
         /** @var \\Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $content = $resultPage->getLayout()->createBlock(Grid::class)->getExcel();
+        $content = $resultPage->getLayout()->createBlock(ReportGrid::class)->getExcel();
 
         return $this->_fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }

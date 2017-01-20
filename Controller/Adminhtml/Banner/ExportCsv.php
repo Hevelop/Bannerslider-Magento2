@@ -23,7 +23,7 @@
 namespace Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magestore\Bannerslider\Block\Adminhtml\Banner\Grid;
+use Magestore\Bannerslider\Block\Adminhtml\Banner\Grid as BannerGrid;
 use Magestore\Bannerslider\Controller\Adminhtml\Banner;
 
 /**
@@ -41,7 +41,7 @@ class ExportCsv extends Banner
 
         /** @var \\Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $content = $resultPage->getLayout()->createBlock(Grid::class)->getCsv();
+        $content = $resultPage->getLayout()->createBlock(BannerGrid::class)->getCsv();
 
         return $this->_fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }

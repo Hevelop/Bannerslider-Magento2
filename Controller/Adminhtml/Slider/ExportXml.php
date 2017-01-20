@@ -24,7 +24,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magestore\Bannerslider\Controller\Adminhtml\Slider;
-use Magestore\Bannerslider\Block\Adminhtml\Slider\Grid;
+use Magestore\Bannerslider\Block\Adminhtml\Slider\Grid as SliderGrid;
 
 /**
  * ExportXml action
@@ -41,7 +41,7 @@ class ExportXml extends Slider
 
         /** @var \\Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $content = $resultPage->getLayout()->createBlock(Grid::class)->getXml();
+        $content = $resultPage->getLayout()->createBlock(SliderGrid::class)->getXml();
 
         return $this->_fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }

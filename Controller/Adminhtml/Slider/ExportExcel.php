@@ -24,7 +24,7 @@ namespace Magestore\Bannerslider\Controller\Adminhtml\Slider;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magestore\Bannerslider\Controller\Adminhtml\Slider;
-use Magestore\Bannerslider\Block\Adminhtml\Slider\Grid;
+use Magestore\Bannerslider\Block\Adminhtml\Slider\Grid as SliderGrid;
 
 /**
  * Export Excel action
@@ -41,7 +41,7 @@ class ExportExcel extends Slider
 
         /** @var \\Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $content = $resultPage->getLayout()->createBlock(Grid::class)->getExcel();
+        $content = $resultPage->getLayout()->createBlock(SliderGrid::class)->getExcel();
 
         return $this->_fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }
